@@ -1,10 +1,6 @@
 package com.jpacourse.persistence.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "ADDRESS")
@@ -21,6 +17,8 @@ public class AddressEntity {
 	private String addressLine2;
 
 	private String postalCode;
+
+	// Relacja jednostronna: tylko z Doctor lub Patient (brak mappedBy)
 
 	public Long getId() {
 		return id;

@@ -2,14 +2,7 @@ package com.jpacourse.persistence.entity;
 
 import com.jpacourse.persistence.enums.TreatmentType;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "MEDICAL_TREATMENT")
@@ -24,6 +17,12 @@ public class MedicalTreatmentEntity {
 
 	@Enumerated(EnumType.STRING)
 	private TreatmentType type;
+
+	// Relacja jednostronna: MedicalTreatment -> Visit
+	// Od strony dziecka (Visit jest właścicielem relacji)
+	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
+	@JoinColumn(name = "VISIT_ID", nullable = false)
+	private VisitEntity visit;
 
 	public Long getId() {
 		return id;
