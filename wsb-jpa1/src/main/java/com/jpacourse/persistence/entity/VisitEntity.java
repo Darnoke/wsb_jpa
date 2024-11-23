@@ -1,13 +1,10 @@
 package com.jpacourse.persistence.entity;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "VISIT")
@@ -21,6 +18,23 @@ public class VisitEntity {
 
 	@Column(nullable = false)
 	private LocalDateTime time;
+
+	// Relacja dwustronna: Visit -> Doctor
+	// Od strony "Visit" (właściciela relacji)
+	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
+	@JoinColumn(name = "DOCTOR_ID", nullable = false)
+	private DoctorEntity doctor;
+
+	// Relacja dwustronna: Visit -> Patient
+	// Od strony "Visit" (właściciela relacji)
+	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.MERGE)
+	@JoinColumn(name = "PATIENT_ID", nullable = false)
+	private PatientEntity patient;
+
+	// Relacja dwustronna: Visit -> MedicalTreatment
+	// Od strony rodzica (Visit)
+	@OneToMany(mappedBy = "visit", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	private List<MedicalTreatmentEntity> medicalTreatments = new ArrayList<>();
 
 	public Long getId() {
 		return id;

@@ -2,14 +2,9 @@ package com.jpacourse.persistence.entity;
 
 import com.jpacourse.persistence.enums.Specialization;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "DOCTOR")
@@ -36,6 +31,17 @@ public class DoctorEntity {
 	@Column(nullable = false)
 	@Enumerated(EnumType.STRING)
 	private Specialization specialization;
+
+	// Relacja dwustronna: Doctor -> Visit
+	// Od strony dziecka (Visit jest właścicielem relacji)
+	@OneToMany(mappedBy = "doctor", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	private List<VisitEntity> visits = new ArrayList<>();
+
+	// Relacja jednostronna: Doctor -> Address
+	// Od strony rodzica (Doctor)
+	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@JoinColumn(name = "ADDRESS_ID", nullable = true)
+	private AddressEntity address;
 
 	public Long getId() {
 		return id;
