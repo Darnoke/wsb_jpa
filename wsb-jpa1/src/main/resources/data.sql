@@ -1,6 +1,6 @@
 -- Address for Doctor
 insert into address (id, address_line1, address_line2, city, postal_code)
-values (1, 'Street 1', 'Building A', 'Warsaw', '00-001');
+values (1, 'Street 1', 'Building A', 'Warsaw', '62-030');
 
 -- Address for Patient
 insert into address (id, address_line1, address_line2, city, postal_code)
@@ -11,8 +11,8 @@ insert into doctor (id, first_name, last_name, telephone_number, email, doctor_n
 values (1, 'John', 'Doe', '123456789', 'johndoe@example.com', 'DOC001', 'Cardiology', 1);
 
 -- Patient
-insert into patient (id, first_name, last_name, telephone_number, email, patient_number, date_of_birth, address_id)
-values (1, 'Jane', 'Smith', '987654321', 'janesmith@example.com', 'PAT001', '1990-05-15', 2);
+insert into patient (id, first_name, last_name, telephone_number, email, patient_number, date_of_birth, address_id, is_insured)
+values (1, 'Jane', 'Smith', '987654321', 'janesmith@example.com', 'PAT001', '1990-05-15', 2, true);
 
 -- Visit
 insert into visit (id, description, time, doctor_id, patient_id)
