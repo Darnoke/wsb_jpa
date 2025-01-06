@@ -31,7 +31,7 @@ public final class VisitMapper
 
         return visitTO;
     }
-
+//TODO: Może jeśli finalnie nie będzie używane to usunąć ?
     public static VisitEntity mapToEntity(final VisitTO visitTO) {
         if (visitTO == null) {
             return null;
