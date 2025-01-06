@@ -14,8 +14,11 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -58,4 +61,18 @@ public class PatientDaoTest {
         assertThat(visit.getDescription()).isEqualTo("Walidacja testów");
         assertThat(visit.getDoctor().getId()).isEqualTo(doctor.getId());
     }
+    @Test
+    public void shouldFindPatientsByLastName() {
+        // given
+        String lastName = "Doe";
+
+        // when
+        List<PatientEntity> patients = patientDao.findByLastName(lastName);
+
+        // then
+        assertFalse(patients.isEmpty(), "No patients found with last name 'Doe'");
+        assertTrue(patients.stream().allMatch(p -> p.getLastName().equalsIgnoreCase(lastName)));
+    }
+
+
 }

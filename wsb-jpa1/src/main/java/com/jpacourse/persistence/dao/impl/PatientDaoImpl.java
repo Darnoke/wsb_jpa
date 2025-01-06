@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Repository
 public class PatientDaoImpl extends AbstractDao<PatientEntity, Long> implements PatientDao {
@@ -32,4 +33,15 @@ public class PatientDaoImpl extends AbstractDao<PatientEntity, Long> implements 
             entityManager.merge(patient);
         }
     }
+
+    @Override
+    public List<PatientEntity> findByLastName(String lastName) {
+        return entityManager.createQuery(
+                "SELECT p FROM PatientEntity p WHERE LOWER(p.lastName) LIKE LOWER(:lastName)",
+                PatientEntity.class
+            )
+            .setParameter("lastName", lastName)
+            .getResultList();
+    }
+
 }
