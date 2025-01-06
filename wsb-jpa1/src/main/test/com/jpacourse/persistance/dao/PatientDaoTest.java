@@ -32,7 +32,7 @@ public class PatientDaoTest {
 
     @Transactional
     @Test
-    public void testAddVisitToPatient() {
+    public void testShouldAddVisitToPatient() {
         // given
         PatientEntity patient = new PatientEntity();
         patient.setFirstName("Konrad");
@@ -63,7 +63,7 @@ public class PatientDaoTest {
     }
 
     @Test
-    public void shouldFindPatientsByLastName() {
+    public void testShouldFindPatientsByLastName() {
         // given
         String lastName = "Doe";
 
@@ -76,7 +76,7 @@ public class PatientDaoTest {
     }
 
     @Test
-    public void testFindPatientsWithMoreThanXVisits() {
+    public void testShouldFindPatientsWithMoreThanXVisits() {
         // given
         Long visitCount = 2L;
 

@@ -20,10 +20,10 @@ values (2, 'Street 2', 'Apartment 5', 'Krakow', '30-001');
 
 -- Doctors
 insert into doctor (id, first_name, last_name, telephone_number, email, doctor_number, specialization, address_id)
-values (1, 'John', 'Doe', '123456789', 'johndoe@example.com', 'DOC001', 'Cardiology', 1);
-
+values (1, 'John', 'Doe', '123456789', 'johndoe@example.com', 'DOC001', 'SURGEON', 1);
+-- Specializacja to ENUM ;)
 insert into doctor (id, first_name, last_name, email, telephone_number, address_id, doctor_number, specialization)
-            values (2, 'Jane', 'Evans ', '2@2.2', '987654321', 3, 'DOC002', 'Internist');
+            values (2, 'Jane', 'Evans ', '2@2.2', '987654321', 3, 'DOC002', 'GP');
 
 -- Patients
 insert into patient (id, first_name, last_name, telephone_number, email, patient_number, date_of_birth, address_id, is_insured)
@@ -51,19 +51,22 @@ values
 
 -- Medical Treatments for the Visits
 insert into medical_treatment (id, description, type, visit_id)
-values (1, 'Blood Test', 'Lab Test', 1),
-       (2, 'ECG', 'Procedure', 1);
+values (1, 'Blood Test', 'RTG', 1),
+       (2, 'ECG', 'EKG', 1);
 
 insert into medical_treatment (id, description, type, visit_id)
 values
-       (3, 'Antibiotics', 'Medication', 2),
-       (4, 'MRI Scan', 'Procedure', 3),
-       (5, 'Blood Pressure Monitoring', 'Procedure', 5),
-      (6, 'Medicines to lower blood pressure', 'Medication', 5),
-       (7, 'CT Scan', 'Procedure', 6),
-       (8, 'General Health Assessment', 'Assessment', 7);
+       (3, 'Antibiotics', 'USG', 2),
+       (4, 'MRI Scan', 'RTG', 3),
+       (5, 'Blood Pressure Monitoring', 'USG', 5),
+      (6, 'Medicines to lower blood pressure', 'USG', 5),
+       (7, 'CT Scan', 'EKG', 6),
+       (8, 'General Health Assessment', 'EKG', 7);
 
-
+-- TYPE to  ENUM :)
+-- 	USG,
+-- 	EKG,
+-- 	RTG
 
 
 

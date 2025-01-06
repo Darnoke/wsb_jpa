@@ -4,7 +4,15 @@ Uwaga! Do wykonania zadan konieczne jest zaimplementowanie architektury warstwow
 
 Uzupelnij plik data.sql o dane niezbedne do realizacji nastepujacych zapytan:
 1. Znajdz pacjentow po nazwisku
+```
+SELECT * FROM PATIENT 
+    WHERE lower(last_name) LIKE 'doe';
+```
 2. Znajdz wszystkie wizyty pacjenta po jego ID
+```
+SELECT * FROM visit 
+    WHERE patient_id = 1;
+```
 3. znajdz pacjentow ktorzy mieli wiecej niz X wizyt (X jest parametrem wejsciowym)
 4. Znajdz pacjentow po dodanym przez Ciebie polu - nie wyszukuj wprost po wartosci, uzyj zapytania typu wieksze/mniejsze/pozniej/wczesniej/zawiera, w zaleznosci od wybranego typu zmiennej.
 

@@ -17,6 +17,7 @@ public final class VisitMapper
         visitTO.setId(visitEntity.getId());
         visitTO.setDescription(visitEntity.getDescription());
         visitTO.setTime(visitEntity.getTime());
+        visitTO.setPatientId(visitEntity.getPatient().getId());
 
         if (visitEntity.getDoctor() != null) {
             visitTO.setDoctorName(visitEntity.getDoctor().getFirstName() + " " + visitEntity.getDoctor().getLastName());
