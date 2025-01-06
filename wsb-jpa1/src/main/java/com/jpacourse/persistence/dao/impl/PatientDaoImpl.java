@@ -44,4 +44,14 @@ public class PatientDaoImpl extends AbstractDao<PatientEntity, Long> implements 
             .getResultList();
     }
 
+    @Override
+    public List<PatientEntity> findPatientsWithMoreThanXVisits(Long visitCount) {
+        return entityManager.createQuery(
+                "SELECT p FROM PatientEntity p LEFT JOIN FETCH p.visits v " +
+                "WHERE (SELECT COUNT(v1) FROM VisitEntity v1 WHERE v1.patient = p) > :visitCount",
+                PatientEntity.class
+            )
+            .setParameter("visitCount", visitCount)
+            .getResultList();
+    }
 }

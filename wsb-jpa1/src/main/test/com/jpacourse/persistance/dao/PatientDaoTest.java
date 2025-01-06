@@ -61,6 +61,7 @@ public class PatientDaoTest {
         assertThat(visit.getDescription()).isEqualTo("Walidacja testów");
         assertThat(visit.getDoctor().getId()).isEqualTo(doctor.getId());
     }
+
     @Test
     public void shouldFindPatientsByLastName() {
         // given
@@ -74,5 +75,18 @@ public class PatientDaoTest {
         assertTrue(patients.stream().allMatch(p -> p.getLastName().equalsIgnoreCase(lastName)));
     }
 
+    @Test
+    public void testFindPatientsWithMoreThanXVisits() {
+        // given
+        Long visitCount = 2L;
 
+        // when
+        List<PatientEntity> patients = patientDao.findPatientsWithMoreThanXVisits(visitCount);
+
+        // then
+        assertThat(patients).isNotEmpty();
+        assertThat(patients).allSatisfy(patient ->
+            assertThat(patient.getVisits().size()).isGreaterThan(visitCount.intValue())
+        );
+    }
 }
