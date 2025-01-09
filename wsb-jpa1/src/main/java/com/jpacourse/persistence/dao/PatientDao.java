@@ -1,7 +1,6 @@
 package com.jpacourse.persistence.dao;
 
 import com.jpacourse.persistence.entity.PatientEntity;
-import org.springframework.data.jpa.repository.Query;
 
 import java.time.LocalDateTime;
 import java.util.List;
