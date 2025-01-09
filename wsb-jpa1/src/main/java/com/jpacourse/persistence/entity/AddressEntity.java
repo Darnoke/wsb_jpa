@@ -18,6 +18,9 @@ public class AddressEntity {
 
 	private String postalCode;
 
+	@Version
+	private Long version;
+
 	// Relacja jednostronna: tylko z Doctor lub Patient (brak mappedBy)
 
 	public Long getId() {

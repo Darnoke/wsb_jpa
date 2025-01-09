@@ -54,4 +54,15 @@ public class PatientDaoImpl extends AbstractDao<PatientEntity, Long> implements 
             .setParameter("visitCount", visitCount)
             .getResultList();
     }
+
+    @Override
+    public List<PatientEntity> findByInsured(boolean isInsured) {
+        // Dodane pole to isInsured jest typu boolean, więc ciezko zlozyc bardziej skomplikowane zapytanie
+        return entityManager.createQuery(
+                "SELECT p FROM PatientEntity p WHERE p.isInsured = :isInsured",
+                PatientEntity.class
+            )
+            .setParameter("isInsured", isInsured)
+            .getResultList();
+    }
 }
