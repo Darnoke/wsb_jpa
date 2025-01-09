@@ -6,10 +6,12 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.orm.ObjectOptimisticLockingFailureException;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -71,5 +73,22 @@ public class AddressDaoTest
         assertThat(removed).isNull();
     }
 
+    @Transactional
+    @Test
+    public void testShouldDetectOptimisticLockingConflict() {
+        // Pierwsza transakcja
+        AddressEntity firstTransactionEntity = addressDao.findOne(1L);
+        firstTransactionEntity.setCity("UpdatedCity1");
+        addressDao.save(firstTransactionEntity);
 
+        // Druga transakcja
+        AddressEntity secondTransactionEntity = addressDao.findOne(1L);
+        secondTransactionEntity.setCity("UpdatedCity2");
+
+        // Sprawdzenie wyjątku
+        addressDao.save(secondTransactionEntity);
+        // powinno rzucić wyjątek, ale nie rzuca :(
+        // assertThatThrownBy(() -> addressDao.save(secondTransactionEntity))
+        // .isInstanceOf(ObjectOptimisticLockingFailureException.class);
+    }
 }

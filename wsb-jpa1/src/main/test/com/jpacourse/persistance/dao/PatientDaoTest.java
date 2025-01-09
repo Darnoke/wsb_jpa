@@ -89,4 +89,19 @@ public class PatientDaoTest {
             assertThat(patient.getVisits().size()).isGreaterThan(visitCount.intValue())
         );
     }
+
+    @Test
+    public void testShouldFindPatientsByInsured() {
+        // given
+        boolean isInsured = true;
+
+        // when
+        List<PatientEntity> patients = patientDao.findByInsured(isInsured);
+
+        // then
+        assertThat(patients).isNotEmpty();
+        assertThat(patients).allSatisfy(patient ->
+            assertThat(patient.isInsured()).isTrue()
+        );
+    }
 }
